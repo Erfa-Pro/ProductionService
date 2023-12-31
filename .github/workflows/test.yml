@@ -29,6 +29,6 @@ jobs:
       uses: dotnet/code-analysis@v1
       id: code-analysis
       with:
-        solution: MySolution.sln
+        solution: Erfa.ProductionService.sln
         build-breaking: true
         all-categories: all
