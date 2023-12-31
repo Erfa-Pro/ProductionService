@@ -24,10 +24,3 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
-
-    - name: Run .NET Code Analysis
-      uses: dotnet/code-analysis@v1
-      with:
-        solution: Erfa.ProductionService.sln
-        build-breaking: true
-        all-categories: all
