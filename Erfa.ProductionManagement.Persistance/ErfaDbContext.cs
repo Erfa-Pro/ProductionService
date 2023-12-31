@@ -18,7 +18,7 @@ namespace Erfa.ProductionManagement.Persistence
             modelBuilder.HasDefaultSchema("production");
             modelBuilder.Entity<Product>()
                                     .HasIndex(b => new { b.ProductNumber });
-
+                                    
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ErfaDbContext).Assembly);
 
             base.OnModelCreating(modelBuilder);

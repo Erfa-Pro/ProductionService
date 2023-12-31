@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
-using Erfa.ProductionManagement.Application.Contracts.Persistence;
-using Erfa.ProductionManagement.Application.Exceptions;
-using Erfa.ProductionManagement.Application.Features.Catalog.Commands.CreateProduct;
-using Erfa.ProductionManagement.Application.Profiles;
 using Erfa.ProductionManagement.Application.Test.Unit.Mocks;
+using Erfa.ProductionManagement.Application.Contracts.Persistence;
+using Erfa.ProductionManagement.Application.Features.Catalog.Commands.CreateProduct;
+using Erfa.ProductionManagement.Application.Services;
 using Erfa.ProductionManagement.Domain.Entities;
-using Moq;
 using Shouldly;
+using Moq;
+using Erfa.ProductionManagement.Application.Exceptions;
+using Erfa.ProductionManagement.Application.Profiles;
+using FluentValidation;
+using MediatR;
 
 namespace Erfa.ProductionManagement.Application.Test.Unit.Catalog.Commands
 {
@@ -14,6 +17,7 @@ namespace Erfa.ProductionManagement.Application.Test.Unit.Catalog.Commands
     {
         private readonly Mock<IAsyncRepository<Product>> _mockCatalogRepository;
         private readonly IMapper _mapper;
+        private CreateProductCommandHandler SUT;
 
         public CreateProductCommandHandlerTest()
         {
@@ -31,7 +35,7 @@ namespace Erfa.ProductionManagement.Application.Test.Unit.Catalog.Commands
         public async Task GivenValidCommand_WhenCreateProduct_ProductIsSavedInDatabase()
         {
             var mockProductionService = ServiceMocks.GetProductionService();
-            CreateProductCommandHandler SUT = new CreateProductCommandHandler(_mockCatalogRepository.Object, _mapper, mockProductionService.Object);
+            SUT = new CreateProductCommandHandler(_mockCatalogRepository.Object, _mapper, mockProductionService.Object);
 
             var command = new CreateProductCommand(RepositoryMocks._validCommand, RepositoryMocks._UserName);
             var prNumber = "DSAds";
@@ -50,14 +54,14 @@ namespace Erfa.ProductionManagement.Application.Test.Unit.Catalog.Commands
             var prNumber = "xcxcx";
             var command = new CreateProductCommand(RepositoryMocks._validCommand, RepositoryMocks._UserName);
             command.ProductNumber = prNumber;
-            CreateProductCommandHandler SUT = new CreateProductCommandHandler(_mockCatalogRepository.Object, _mapper, ServiceMocks.ProductionService_InvalidRequest());
+            SUT = new CreateProductCommandHandler(_mockCatalogRepository.Object, _mapper, ServiceMocks.ProductionService_InvalidRequest());
             await Should.ThrowAsync<Exceptions.ValidationException>(async () => await SUT.Handle(command, CancellationToken.None));
         }
 
         [Test]
         public async Task GivenExistingProductNumber_WhenCreateProduct_PersistenceExceptionIsThrown()
         {
-            CreateProductCommandHandler SUT = new CreateProductCommandHandler(_mockCatalogRepository.Object, _mapper, ServiceMocks.GetProductionService().Object);
+            SUT = new CreateProductCommandHandler(_mockCatalogRepository.Object, _mapper, ServiceMocks.GetProductionService().Object);
 
             var command = new CreateProductCommand(RepositoryMocks._existingProductNumberCreateProductCommand, RepositoryMocks._UserName);
 

@@ -1,7 +1,7 @@
 ﻿
+using FluentValidation.TestHelper;
 using Erfa.ProductionManagement.Application.Features.Catalog.Commands.CreateProduct;
 using Erfa.ProductionManagement.Application.RequestModels;
-using FluentValidation.TestHelper;
 
 namespace Erfa.ProductionManagement.Application.Test.Unit.Catalog.Commands
 {
@@ -13,8 +13,14 @@ namespace Erfa.ProductionManagement.Application.Test.Unit.Catalog.Commands
         public readonly string _MaterialProductName = "TestMaterialProductName";
         public readonly double _ProductionTimeSec = 88;
         public readonly string _UserName = "Magdalena";
-        private CreateProductCommandValidator SUT = new();
 
+        private CreateProductCommandValidator SUT;
+
+        [SetUp]
+        public void Setup()
+        {
+            SUT = new CreateProductCommandValidator();
+        }
 
         [Test]
         public void Should_not_have_error_when_all_properties_are_empty()

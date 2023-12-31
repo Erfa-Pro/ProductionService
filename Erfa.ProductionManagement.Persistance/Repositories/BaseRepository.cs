@@ -1,4 +1,5 @@
 ﻿using Erfa.ProductionManagement.Application.Contracts.Persistence;
+using Erfa.ProductionManagement.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace Erfa.ProductionManagement.Persistence.Repositories
@@ -37,7 +38,7 @@ namespace Erfa.ProductionManagement.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<T?> GetByIdAsync(Guid id)
+        public async Task<T> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }

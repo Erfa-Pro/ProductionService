@@ -15,7 +15,16 @@ namespace Erfa.ProductionManagement.Api.Controllers.V1
         {
             _mediator = mediator;
         }
-                
+
+        [HttpGet("All", Name = "All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<string>> GetAllItems()
+        {
+            var result = "Hello";
+            return Ok(result);
+        }
 
         [HttpPost("Create", Name = "CreateNewProduct")]
         [ProducesResponseType(StatusCodes.Status200OK)]

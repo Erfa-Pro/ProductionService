@@ -37,7 +37,7 @@ namespace Erfa.ProductionManagement.Application.Features.Catalog.Commands.Create
                 //TODO send event
                 await _catalogRepository.AddAsync(product);
             }
-            catch 
+            catch (Exception ex)
             {
                 throw new EntityCreateException(nameof(Product), request);
             }
