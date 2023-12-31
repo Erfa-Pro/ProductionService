@@ -27,7 +27,6 @@ jobs:
 
     - name: Run .NET Code Analysis
       uses: dotnet/code-analysis@v1
-      id: code-analysis
       with:
         solution: Erfa.ProductionService.sln
         build-breaking: true
