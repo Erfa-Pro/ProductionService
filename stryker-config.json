@@ -1,0 +1,7 @@
+{
+  "stryker-config": {
+    "mutate": [ "!**/*Registration.cs", "!**/*Exception.cs", "!**/Product.cs" ,"!**/*Command.cs"]
+   
+    
+  }
+}

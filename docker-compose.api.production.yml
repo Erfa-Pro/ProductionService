@@ -1,0 +1,51 @@
+﻿version: '3.7'
+
+name: erfaapiproduction
+
+services:
+
+  erfa_data_prod:
+    image: postgres:14.1-alpine
+    restart: always
+    hostname: postgres
+    container_name: erfa_test_production_data_api_production
+    ports:
+      - 5480:5432
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: Qwer!234
+      POSTGRES_DB: ProductionManagement
+    healthcheck:
+          test: ["CMD-SHELL", "pg_isready", "-d", "db_prod"]
+          interval: 30s
+          timeout: 60s
+          retries: 5
+          start_period: 80s
+    networks:
+      - erfaapiproduction
+
+  prod_service:
+    depends_on:
+      erfa_data_prod:
+         condition: service_healthy
+    links: 
+      - erfa_data_prod
+    restart: on-failure
+    build:
+      context: .
+    container_name: erfa_test_production_api_production
+    ports:
+      - 4080:80
+    environment:
+      - ConnectionStrings__PostgreSQLConnString=Host=erfa_data_prod;Port=5432;Database=ProductionManagement;UserName=sa;Password=Qwer!234
+      - Cors__PolicyName=test_policy
+      - Cors__AllowedOrigins__0__=https://dosmarter.tech
+      - Cors__AllowedOrigins__1__=https://127.0.0.1:3000
+    networks:
+      - erfaapiproduction
+
+networks:
+  erfaapiproduction:
+    name: erfaapiproduction
+
+   

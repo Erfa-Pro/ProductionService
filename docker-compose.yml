@@ -1,0 +1,34 @@
+version: '3.7'
+name: erfa_production_management
+
+services:
+
+  data_prod:
+    image: postgres:13.0
+    container_name: erfa_production_data
+    ports:
+      - 4433:5432
+    environment:
+      POSTGRES_USER: sa
+      POSTGRES_PASSWORD: Qwer!234
+      POSTGRES_DB: ProductionManagement
+    restart: always
+    networks:
+      - productionmanagement
+
+  prod_service:
+    depends_on:
+      - data_prod
+    build: 
+        context: /
+        dockerfile: Dockerfile
+    container_name: erfa_production_service
+    ports:
+      - 5060:80
+    environment:
+      - ConnectionStrings__PostgreSQLConnString=Host=data_prod;Port=4433;Database=ProductionManagement;Username=sa;Password=Qwer!234
+    networks:
+      - productionmanagement
+
+networks:
+  productionmanagement:
