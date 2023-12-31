@@ -5,7 +5,7 @@ namespace Erfa.ProductionManagement.Application.Features.Catalog.Commands.Create
 {
     public class CreateProductCommand : CreateProductRequestModel, IRequest<string>
     {
-        public string UserName { get;  } = string.Empty;
+        public string UserName { get; } = string.Empty;
 
         public CreateProductCommand(CreateProductRequestModel request, string userName)
         {

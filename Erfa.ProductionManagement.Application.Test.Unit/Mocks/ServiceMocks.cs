@@ -2,7 +2,6 @@
 using FluentValidation;
 using MediatR;
 using Moq;
-using System.ComponentModel.DataAnnotations;
 
 namespace Erfa.ProductionManagement.Application.Test.Unit.Mocks
 {

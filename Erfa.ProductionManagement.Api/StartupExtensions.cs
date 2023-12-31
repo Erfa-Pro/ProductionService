@@ -1,11 +1,11 @@
-﻿using Erfa.ProductionManagement.Application;
-using Erfa.ProductionManagement.Persistence;
+﻿using Erfa.ProductionManagement.Api.Controllers.V1;
 using Erfa.ProductionManagement.Api.Middlewares;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Mvc.Versioning;
+using Erfa.ProductionManagement.Application;
+using Erfa.ProductionManagement.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Erfa.ProductionManagement.Api.Controllers.V1;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Erfa.ProductionManagement.Api
 {

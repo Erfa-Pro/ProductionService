@@ -19,7 +19,7 @@ namespace Erfa.ProductionManagement.Persistence.Repositories
             return Products;
         }
 
-        public async Task<Product> GetByProductNumber(string ProductNumber)
+        public async Task<Product?> GetByProductNumber(string ProductNumber)
         {
             return await _dbContext.Products
                  .Where(i => string
