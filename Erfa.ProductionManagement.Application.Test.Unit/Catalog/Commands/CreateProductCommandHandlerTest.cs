@@ -51,7 +51,7 @@ namespace Erfa.ProductionManagement.Application.Test.Unit.Catalog.Commands
             var command = new CreateProductCommand(RepositoryMocks._validCommand, RepositoryMocks._UserName);
             command.ProductNumber = prNumber;
             CreateProductCommandHandler SUT = new CreateProductCommandHandler(_mockCatalogRepository.Object, _mapper, ServiceMocks.ProductionService_InvalidRequest());
-            await Should.ThrowAsync<Exceptions.ValidationException>(async () => await SUT.Handle(command, CancellationToken.None));
+            await Should.ThrowAsync<ValidationException>(async () => await SUT.Handle(command, CancellationToken.None));
         }
 
         [Test]
