@@ -16,8 +16,11 @@ namespace Erfa.ProductionManagement.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("production");
-            modelBuilder.Entity<Product>()
-                                    .HasIndex(b => new { b.ProductNumber });
+            modelBuilder.Entity<Product>().Property(b => b.ProductNumber)
+                                                .IsRequired()
+                                                .HasAnnotation("AllowEmptyStrings", false);
+                                                
+            modelBuilder.Entity<Product>().HasIndex(b => new { b.ProductNumber }).IsUnique();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ErfaDbContext).Assembly);
 

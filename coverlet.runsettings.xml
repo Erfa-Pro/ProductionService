@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="XPlat code coverage">
+				<Configuration>
+					<Format>cobertura</Format>
+					<Exclude>[*]Erfa.ProductionManagement.Application.Test.Unit*,[*]Erfa.ProductionManagement.Persistance.Migrations*</Exclude>
+					<Include>[./Erfa.ProductionManagement.Application.*],[./Erfa.ProductionManagement.Domain*],[Erfa.ProductionManagement.Persistance*]</Include>
+					<ExcludeByFile>**/Erfa.ProductionManagement.Persistence/PersistenceServiceRegistration.cs,**/Erfa.ProductionManagement.Application/ApplicationServiceRegistration.cs</ExcludeByFile>					
+					<SkipAutoProps>true</SkipAutoProps>
+					<!-- Globbing filter -->
+					<IncludeDirectory>./Erfa.ProductionManagement.Application.Test.Unit/,./Erfa.ProductionManagement.Persistance.Test.Integration/</IncludeDirectory>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>
