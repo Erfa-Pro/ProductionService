@@ -73,7 +73,7 @@ namespace Erfa.ProductionManagement.Application.Test.Unit.Mocks
                     {
                         if (p.ProductNumber == product.ProductNumber)
                         {
-                            throw new EntityCreateException("", "");
+                            throw new EntityCreateException("");
                         }
                     });
 

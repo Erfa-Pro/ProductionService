@@ -1,4 +1,5 @@
-﻿using Erfa.ProductionManagement.Application.Services;
+﻿using Erfa.ProductionManagement.Application.Contracts.ServiceBus;
+using Erfa.ProductionManagement.Application.Services;
 using FluentValidation;
 using MediatR;
 using Moq;
@@ -31,6 +32,14 @@ namespace Erfa.ProductionManagement.Application.Test.Unit.Mocks
             {
                 throw new Exceptions.ValidationException(new FluentValidation.Results.ValidationResult());
             }
+        }
+
+        public static Mock<IServiceBusClient> GetServiceBusMock()
+        {
+            var service = new Mock<IServiceBusClient>();
+            service.Setup(service => service.PublishEventAsync<It.IsAnyType>(It.IsAny<string>(), It.IsAny<It.IsAnyType>())).Verifiable();
+
+            return service;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Erfa.ProductionManagement.Api.Middlewares;
 using Erfa.ProductionManagement.Application;
 using Erfa.ProductionManagement.Persistence;
+using Erfa.ProductionManagement.ServiceBus;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -26,6 +27,7 @@ namespace Erfa.ProductionManagement.Api
 
             builder.Services.AddApplicationServices();
             builder.Services.AddPersistenceServices(builder.Configuration);
+            builder.Services.AddServiceBusServics(builder.Configuration);
 
 
             builder.Services.AddHttpContextAccessor();

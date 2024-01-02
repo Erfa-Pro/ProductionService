@@ -2,8 +2,8 @@
 {
     public class EntityCreateException : Exception
     {
-        public EntityCreateException(string name, object key)
-            : base($"{name} ({key}) not modified")
+        public EntityCreateException(string name)
+            : base($"{name} not created")
         {
         }
     }

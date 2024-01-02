@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Erfa.ProductionManagement.Application\Erfa.ProductionManagement.Application.csproj" />
     <ProjectReference Include="..\Erfa.ProductionManagement.Persistance\Erfa.ProductionManagement.Persistance.csproj" />
+    <ProjectReference Include="..\Erfa.ProductionManagement.ServiceBus\Erfa.ProductionManagement.ServiceBus.csproj" />
   </ItemGroup>
 
 </Project>

@@ -19,14 +19,26 @@ services:
   prod_service:
     depends_on:
       - data_prod
-    build: 
-        context: /
-        dockerfile: Dockerfile
+    build:
+      context: /
+      dockerfile: Dockerfile
     container_name: erfa_production_service
     ports:
       - 5060:80
     environment:
       - ConnectionStrings__PostgreSQLConnString=Host=data_prod;Port=4433;Database=ProductionManagement;Username=sa;Password=Qwer!234
+    networks:
+      - productionmanagement
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'production_rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
       - productionmanagement
 

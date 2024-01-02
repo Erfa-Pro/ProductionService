@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Erfa.ProductionManagement.Application.Features.Catalog.Commands.CreateProduct;
+using Erfa.ProductionManagement.Application.Models.Catalog;
 using Erfa.ProductionManagement.Domain.Entities;
 
 namespace Erfa.ProductionManagement.Application.Profiles
@@ -14,6 +15,12 @@ namespace Erfa.ProductionManagement.Application.Profiles
                 .ForMember(product => product.LastModifiedBy, model => model.MapFrom(m => m.UserName))
                 .ForMember(product => product.CreatedDate, model => model.MapFrom(m => DateTime.UtcNow))
                 .ForMember(product => product.LastModifiedDate, model => model.MapFrom(m => DateTime.UtcNow));
+
+            CreateMap<Product, ProductCreatedEvent>()
+                .ForMember(evnt => evnt.EventId, product => product.MapFrom(product => Guid.NewGuid()))
+                .ForMember(evnt => evnt.ProductId, product => product.MapFrom(product => product.Id))
+                ;
+            
         }
     }
 }
